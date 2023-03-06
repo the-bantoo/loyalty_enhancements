@@ -5,7 +5,7 @@ def set_loyalty_balance(doc, method):
 	if not frappe.db.exists("Sales Invoice", doc.name):
 		return
 
-	# check if loyalty_balance field exists and create it otherwise
+	# check if loyalty_balance custom field exists and create it otherwise
 	if not frappe.db.exists("Custom Field", {"dt": "Sales Invoice", "fieldname": "loyalty_balance"}):
 		frappe.get_doc({
 			"doctype": "Custom Field",
@@ -20,14 +20,11 @@ def set_loyalty_balance(doc, method):
 	loyalty_balance = get_loyalty_balance(doc)
 
 	if int(doc.loyalty_balance) != int(loyalty_balance):
-		print("save")
 		doc.reload()
 		doc.loyalty_balance = loyalty_balance
-		doc.loyalty_points = loyalty_balance
 		doc.save()
 		frappe.db.commit()
 		frappe.reload_doc("ERPNext Loyalty Enhancements", "doctype", "Sales Invoice")
-		print("saved")
 		
 
 @frappe.whitelist()
