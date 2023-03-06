@@ -14,6 +14,8 @@ def set_loyalty_balance(doc, method):
 			"label": "Loyalty Balance",
 			"fieldtype": "Int",
 			"insert_after": "loyalty_points",
+			"allow_on_submit": 1,
+			"no_copy": 1,
 			"read_only": 1
 		}).insert(ignore_permissions=True)
 		
