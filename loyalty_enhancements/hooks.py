@@ -109,6 +109,12 @@ app_license = "MIT"
 #		"on_trash": "method"
 #	}
 # }
+doc_events = {
+    "Sales Invoice": {
+        "on_update": "loyalty_enhancements.loyalty.set_loyalty_balance"
+    }
+}
+
 
 # Scheduled Tasks
 # ---------------
