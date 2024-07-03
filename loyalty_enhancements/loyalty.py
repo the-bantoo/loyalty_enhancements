@@ -20,6 +20,10 @@ def set_loyalty_balance(doc, method):
 		}).insert(ignore_permissions=True)
 		
 	loyalty_balance = get_loyalty_balance(doc)
+	if not loyalty_balance:
+		loyalty_balance = 0
+	if not doc.loyalty_balance:
+		doc.loyalty_balance = 0
 
 	if int(doc.loyalty_balance) != int(loyalty_balance):
 		doc.reload()
